@@ -1,15 +1,15 @@
-package tokyo.peya.plugins.psacimproved;
+package tokyo.peya.plugins.peyangplayerreporter;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Logger;
 
-public final class PSACImproved extends JavaPlugin
+public final class PeyangPlayerReporter extends JavaPlugin
 {
-    public static PSACImproved instance;
+    public static PeyangPlayerReporter instance;
     public static Logger logger;
 
-    public PSACImproved()
+    public PeyangPlayerReporter()
     {
         instance = this;
         logger = getLogger();

@@ -1,8 +1,7 @@
-name: PSACImproved
+name: PeyangPlayerReporter
 version: ${project.version}
-main: tokyo.peya.plugins.pascimproved.PSACImproved
+main: tokyo.peya.plugins.peyangplayerreporter.PeyangPlayerReporter
 api-version: 1.16
-softdepend: [PeyangGreatBanManager]
 authors: [Peyang, Potato1682]
-description: Improved PeyangSuperbAntiCheat
-prefix: PeyangSuperbAntiCheat
+description: PeyangPlayerReporter
+prefix: PlayerReport

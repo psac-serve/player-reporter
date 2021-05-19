@@ -1,4 +1,4 @@
-package tokyo.peya.plugins.psacimproved;
+package tokyo.peya.plugins.peyangplayerreporter;
 
 import com.zaxxer.hikari.HikariDataSource;
 import org.bukkit.configuration.file.FileConfiguration;

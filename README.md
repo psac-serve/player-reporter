@@ -1,3 +1,3 @@
-# PSAC-Improved
+# PeyangPlayerReporter
 ## 概要
-[PSAC](https://github.com/P2P-Develop/PeyangSuperbAnticheat)の改善版
+プレイヤーレポーター
