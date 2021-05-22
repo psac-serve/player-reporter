@@ -6,8 +6,7 @@ import tokyo.peya.lib.SQLModifier;
 
 import java.sql.Connection;
 
-import static tokyo.peya.plugins.peyangplayerreporter.Variables.config;
-import static tokyo.peya.plugins.peyangplayerreporter.Variables.dataSource;
+import static tokyo.peya.plugins.peyangplayerreporter.Variables.*;
 
 public class Init
 {
@@ -15,6 +14,7 @@ public class Init
     {
         initializeConfiguration();
         initializeVariables();
+        initializeDatabases();
     }
 
     private static void initializeConfiguration()
@@ -25,7 +25,8 @@ public class Init
 
     public static void initializeDatabases()
     {
-        try(Connection connection = dataSource.getConnection())
+        try(Connection connection = dataSource.getConnection();
+            Connection chatLogConnection = chatLog.getConnection())
         {
             SQLModifier.exec(connection,
                     "CREATE TABLE IF NOT EXISTS REPORT(" +
@@ -36,10 +37,36 @@ public class Init
                             "target_uid text," +
                             "reported_at integer" +
                             ");");
+
             SQLModifier.exec(connection,
                     "CREATE TABLE IF NOT EXISTS REPORT_REASON(" +
-                            "id text unique," +
+                            "id text," +
+                            "type text," +
                             "reason text" +
+                            ");");
+
+            SQLModifier.exec(connection,
+                    "CREATE TABLE IF NOT EXISTS CHAT_REPORT_REASON(" +
+                            "id text unique," +
+                            "sender_uid text," +
+                            "receiver_uid text," +
+                            "time integer," +
+                            "content text" +
+                            ");");
+
+            SQLModifier.exec(chatLogConnection,
+                    "CREATE TABLE IF NOT EXISTS CHAT_LOG(" +
+                            "sender_uid text," +
+                            "time integer," +
+                            "content text" +
+                            ");");
+
+            SQLModifier.exec(chatLogConnection,
+                    "CREATE TABLE IF NOT EXISTS PRIV_MSG_LOG(" +
+                            "sender_uid text," +
+                            "receiver_uid text," +
+                            "time integer," +
+                            "content text" +
                             ");");
         }
         catch (Exception e)
@@ -56,5 +83,9 @@ public class Init
         databaseConfig.setDriverClassName(config.getString("database.driver"));
 
         dataSource = new HikariDataSource(databaseConfig);
+
+        databaseConfig.setJdbcUrl("jdbc:sqlite:chat.db");
+
+        chatLog = new HikariDataSource(databaseConfig);
     }
 }

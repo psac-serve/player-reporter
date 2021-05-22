@@ -7,4 +7,5 @@ public class Variables
 {
     public static FileConfiguration config;
     public static HikariDataSource dataSource;
+    public static HikariDataSource chatLog;
 }
